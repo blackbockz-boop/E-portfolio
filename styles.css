@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 h1, h2, h3, h4, h5, h6, span {
     color: #242424;
     text-align: center;
@@ -23,6 +27,35 @@ p {
 
 a {
     text-decoration: none;
+    position: relative;
+    transition: opacity 300ms ease;
+}
+
+i:hover {
+    opacity: 0.7;
+}
+
+.link_hover-effect:after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    bottom: -3px;
+    right: 0;
+    transition: all 300ms ease;
+}
+
+.link_hover-effect--white:after {
+    background-color: #fff;
+}
+
+.link_hover-effect--black:after {
+    background-color: #000;
+}
+
+.link_hover-effect:hover:after {
+width: 100%;
+left: 0;
 }
 
 li {
@@ -45,6 +78,11 @@ li {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
+    padding: 0 12px;
+}
+
+.text--purple {
+  color: #6030b1;
 }
 
 section:nth-child(even) {
@@ -65,10 +103,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.text--purple {
-    color: #6030b1;
+    padding: 0 12px;
 }
 
 .nav_link--list{
@@ -111,7 +146,6 @@ nav {
 .about-me_info {
     display: flex;
     flex-direction: column;
-    font-size: 38px;
 }
 
 .about-me_info--container {
@@ -128,40 +162,100 @@ nav {
     height: 100px;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 28px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.16);
+    margin-bottom: 28px;
+    animation: animate-profile-picture 800ms 200ms backwards;
+}
+
+@keyframes animate-profile-picture {
+    0% {
+        transform: scale(0);
+    }
+    80% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .about-me_picture {
     width: 100%;
+
+    /* IMPROVING MY OWN PICTURE */
     transform: scale(1.5);
     padding-top: 8px;
 }
 
-/* IMPROVING MY OWN PICTURE */
-
     .about-me_info--title {
         margin-bottom: 16px;
+        animation: fade-up 650ms 400ms backwards;
     }
     .about-me_info--para {
         font-size: 20px;
         margin-bottom: 28px;
+        animation: fade-up 650ms 600ms backwards;
     }
 
     .about-me__link {
         font-size: 20px;
         color:#242424;
-        font-weight:0 16px;
+        padding:0 16px;
+    }
+
+    .about-me__links {
+        animation: fade-up 650ms 800ms backwards;
+    }
+
+    @keyframes fade-up {
+        0% {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .about-me_img--container {
         flex: 1;
         display: flex;
         align-items: center;
-        justify-content: center;
     }
 
-    /* TECH STACK */
+    .about-me_img {
+        width: 100%;
+        animation: fade-in 1200ms 800ms backwards;
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .wave {
+        display: inline-block;
+        animation: animate-wave 500ms infinite ease-in-out
+    }
+
+    @keyframes animate-wave {
+        0% {
+            transform: rotate(0);
+        }
+        50%{
+            transform: rotate(30deg);
+        }
+        100%{
+            transform: rotate(0);
+        }
+    }
+
+    /* TECH - STACK */
 
     .Language_img {
         width: 100%;
@@ -170,10 +264,9 @@ nav {
     }
 
     .language:hover .language_img {
-        filter: brightness (80%);
+        filter: brightness(80%);
         opacity: 0.86;
-        transform: scale (0.9);
-
+        transform: scale(0.9);
     }
 
     .language {
@@ -193,6 +286,7 @@ nav {
 
     .language_list {
         display: flex;
+        justify-content: center;
         width: 100%;
         flex-wrap: wrap;
         justify-content: center;
@@ -236,7 +330,7 @@ nav {
         box-shadow: 0 20px 80px rgba(0,0,0,0.45);
         border-radius: 20px;
         overflow: hidden;
-        position:relative
+        position: relative;
     }
 
     .project_wrapper:before {
@@ -330,7 +424,7 @@ nav {
     }
 
     .footer_social--link,
-    .footer_copyright 
+    .footer_copyright,
     .footer_logo--popper{
         color: #fff;
     }
@@ -354,4 +448,66 @@ nav {
         opacity: 1;
     }
 
+    /* small phones, tablets, large smartphones */
 
+    @media (max-width: 768px) {
+    .nav {
+       height: 68px; 
+    }      
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .about-me_info--para {
+        font-size: 18px;
+    }
+
+    .language {
+        width: calc(100% / 3);
+    }
+
+    .project_description--para {
+        font-size: 14px;
+    }
+
+    .project_description {
+        left: 30px;
+        padding-right: 30px;
+    }
+    }
+
+    /* small phones */
+@media (max-width: 480px) {
+    .nav_link:not(:last-child) {
+        display: none;
+    }
+
+    .project_description {
+        padding: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .project_description--para {
+        display: none;
+    }
+
+    .project_description--links {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .project_description--title {
+            font-size: 32px;
+            line-height: 1;
+            text-align: center;
+        }
+    
+    .project_description--sub-title {
+       text-align: center;
+       margin: 12px 0;
+    }
+}
+
+    
